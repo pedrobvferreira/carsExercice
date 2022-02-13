@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="../layout.xhtml">
+
+	<ui:define name="content">
+		<h:form id="productForm">
+			<p:selectOneMenu id="car" value="#{vehicleController.selViatura}">
+				<f:selectItem itemLabel="Select One" itemValue="" />
+				<f:selectItems value="#{vehicleController.lstViaturas}" />
+			</p:selectOneMenu>
+			<p:selectOneMenu id="mens" value="#{vehicleController.selMensalidade}">
+				<f:selectItem itemLabel="Select One" itemValue="" />
+				<f:selectItems value="#{vehicleController.lstMensalidades}" />
+			</p:selectOneMenu>
+			<p:selectOneMenu id="frac" value="#{vehicleController.selFinanciamento}">
+				<f:selectItem itemLabel="Select One" itemValue="" />
+				<f:selectItems value="#{vehicleController.lstFinanciamentos}" />
+			</p:selectOneMenu>
+			
+			<p:commandLink id="action" action="#{vehicleController.createViatura()}"
+				update=":#{ADD_CAR.clientId}">
+	            <h:outputText value="Criar Viatura"/>
+	        </p:commandLink>
+	        
+	        <h:panelGroup id="addCar" layout="block" binding="#{ADD_CAR}">
+	        	<h:panelGroup id="car" rendered="#{vehicleController.selViatura != null}">
+					<div style="padding-bottom: 10px;">
+						<div>Nome Carro</div>
+						<div>
+							#{vehicleController.selViatura.nome}
+						</div>
+					</div>
+					<div style="padding-bottom: 10px;">
+						<div>Cor Carro</div>
+						<div>
+							#{vehicleController.selViatura.cor}
+						</div>
+					</div>
+					<div style="padding-bottom: 10px;">
+						<div>Valor Carro</div>
+						<div>
+							#{vehicleController.selViatura.valorViatura}
+						</div>
+					</div>
+					<div style="padding-bottom: 10px;">
+						<div>Prestacao Mensal</div>
+						<div>
+							#{vehicleController.selViatura.prestacaoMensal}
+						</div>
+					</div>
+					<div style="padding-bottom: 10px;">
+						<p:commandLink id="action" action="#{vehicleController.saveViatura(vehicleController.selViatura)}">
+				            <h:outputText value="Save Viatura"/>
+				        </p:commandLink>
+					</div>
+				</h:panelGroup>
+	        </h:panelGroup>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
